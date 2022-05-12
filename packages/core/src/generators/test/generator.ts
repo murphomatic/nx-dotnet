@@ -32,6 +32,7 @@ export default function (
     template: '',
     standalone: options.standalone,
     projectType: project.projectType ?? 'library',
+    skipSwaggerLib: true,
   };
 
   const normalizedOptions = normalizeOptions(host, projectGeneratorOptions);

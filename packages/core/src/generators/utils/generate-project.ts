@@ -29,6 +29,7 @@ import {
 import initSchematic from '../init/generator';
 import { GenerateTestProject } from './generate-test-project';
 import { addToSolutionFile } from './add-to-sln';
+import generateSwaggerSetup from '../add-swagger-target/add-swagger-target';
 
 export interface NormalizedSchema extends NxDotnetProjectGeneratorSchema {
   projectName: string;
@@ -162,6 +163,13 @@ export async function GenerateProject(
 
   if (!options.skipOutputPathManipulation && !isDryRun()) {
     await manipulateXmlProjectFile(host, normalizedOptions);
+  }
+
+  if (normalizedOptions.template === 'webapi') {
+    generateSwaggerSetup(host, {
+      project: normalizedOptions.projectName,
+      swaggerProject: `${normalizedOptions.projectName}-swagger`,
+    });
   }
 
   await formatFiles(host);
