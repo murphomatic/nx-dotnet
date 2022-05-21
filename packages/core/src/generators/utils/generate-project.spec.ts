@@ -28,6 +28,7 @@ describe('nx-dotnet project generator', () => {
       language: 'C#',
       template: 'classlib',
       testTemplate: 'none',
+      simplifyProjectName: false,
       skipOutputPathManipulation: true,
       standalone: false,
       projectType: 'application',
@@ -103,5 +104,17 @@ describe('nx-dotnet project generator', () => {
     const [, dotnetOptions] = spy.mock.calls[spy.mock.calls.length - 1];
     const nameFlag = dotnetOptions?.name;
     expect(nameFlag).toBe('Proj.SubDir.Test');
+  });
+
+  it('should allow simple project names and namespaces', async () => {
+    options.directory = 'sub-dir';
+    options.simplifyProjectName = true;
+    const spy = jest.spyOn(dotnetClient, 'new');
+    await GenerateProject(appTree, options, dotnetClient, 'library');
+    const [, dotnetOptions] = spy.mock.calls[spy.mock.calls.length - 1];
+    const nameFlag = dotnetOptions?.name;
+    const outputDir = dotnetOptions?.output;
+    expect(outputDir).toBe('libs/sub-dir/test');
+    expect(nameFlag).toBe('Proj.Test');
   });
 });

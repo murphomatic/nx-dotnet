@@ -25,6 +25,12 @@
       "description": "A directory where the project is placed",
       "alias": "d"
     },
+    "simplifyProjectName": {
+      "type": "boolean",
+      "description": "Keep the project name constrained to the simple name vs. a composite of the directory + name",
+      "aliases": ["s", "simplifyProjectName"],
+      "default": false
+    },
     "template": {
       "type": "string",
       "description": "The template to instantiate when the command is invoked. Each template might have specific options you can pass."

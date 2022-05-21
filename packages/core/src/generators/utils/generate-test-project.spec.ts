@@ -82,6 +82,7 @@ describe('nx-dotnet test project generator', () => {
       projectRoot: 'apps/domain/existing-app',
       projectName: 'domain-existing-app',
       projectDirectory: 'domain',
+      simplifyProjectName: false,
       projectLanguage: 'C#',
       parsedTags: [],
       projectTemplate: 'xunit',
