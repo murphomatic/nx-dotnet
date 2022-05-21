@@ -18,6 +18,10 @@ Generate a dotnet project under the application directory.
 
 - (string): A directory where the project is placed
 
+### simplifyProjectName
+
+- (boolean): Keep the project name constrained to the simple name vs. a composite of the directory + name
+
 ### template
 
 - (string): The template to instantiate when the command is invoked. Each template might have specific options you can pass.

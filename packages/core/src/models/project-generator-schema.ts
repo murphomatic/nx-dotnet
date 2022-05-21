@@ -7,6 +7,7 @@ export interface NxDotnetProjectGeneratorSchema {
   name: string;
   tags?: string;
   directory?: string;
+  simplifyProjectName: boolean;
   template?: string;
   language: string;
   testTemplate: 'nunit' | 'mstest' | 'xunit' | 'none';

@@ -59,7 +59,9 @@ export async function normalizeOptions(
   const projectDirectory = options.directory
     ? `${names(options.directory).fileName}/${name}`
     : name;
-  const projectName = projectDirectory.replace(/\//g, '-');
+  const projectName = options.simplifyProjectName
+    ? name
+    : projectDirectory.replace(/\//g, '-');
   const projectRoot = `${
     (projectType || options.projectType) === 'application'
       ? getWorkspaceLayout(host).appsDir
@@ -76,11 +78,14 @@ export async function normalizeOptions(
   const npmScope = names(
     readWorkspaceConfiguration(host).npmScope || '',
   ).className;
-  const featureScope = projectDirectory
+  const featureScope = (
+    options.simplifyProjectName ? projectName : projectDirectory
+  )
     // not sure why eslint complains here, testing in devtools shows different results without the escape character.
     // eslint-disable-next-line no-useless-escape
     .split(/[\/\\]/gm) // Without the unnecessary parentheses, the separator is excluded from the result array.
     .map((part) => names(part).className);
+
   const namespaceName = [npmScope, ...featureScope].join('.');
 
   return {
