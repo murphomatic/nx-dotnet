@@ -17,7 +17,7 @@ export default async function (
   const projectPaths = project.root.split('/');
   const directory = projectPaths.slice(1, -1).join('/'); // The middle portions contain the original path.
   const [name] = projectPaths.slice(-1); // The final folder contains the original name.
-
+  const simplifyProjectName = true;
   console.log(project);
 
   const projectGeneratorOptions: NxDotnetProjectGeneratorSchema = {
@@ -28,6 +28,7 @@ export default async function (
     skipOutputPathManipulation: options.skipOutputPathManipulation,
     testTemplate: options.testTemplate,
     directory,
+    simplifyProjectName,
     tags: project.tags?.join(','),
     template: '',
     standalone: options.standalone,

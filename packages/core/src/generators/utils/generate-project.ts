@@ -59,7 +59,9 @@ export async function normalizeOptions(
   const projectDirectory = options.directory
     ? `${names(options.directory).fileName}/${name}`
     : name;
-  const projectName = projectDirectory.replace(/\//g, '-');
+  const projectName = options.simplifyProjectName
+    ? name
+    : projectDirectory.replace(/\//g, '-');
   const projectRoot = `${
     (projectType || options.projectType) === 'application'
       ? getWorkspaceLayout(host).appsDir

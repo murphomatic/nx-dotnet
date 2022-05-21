@@ -28,6 +28,7 @@ describe('nx-dotnet project generator', () => {
       language: 'C#',
       template: 'classlib',
       testTemplate: 'none',
+      simplifyProjectName: false,
       skipOutputPathManipulation: true,
       standalone: false,
       projectType: 'application',
